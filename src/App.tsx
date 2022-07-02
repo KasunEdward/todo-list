@@ -1,9 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { AddTodoForm } from './AddTodoForm';
 import './App.css';
-import { TodoListItem } from './TodoListItem';
+import { TodoList } from './TodoList';
 
-const todos: Todo[] = [
+const initialTodos: Todo[] = [
   {
     text: "Get up",
     complete: false
@@ -15,11 +15,34 @@ const todos: Todo[] = [
 ]
 
 function App() {
+  const [todos, setTodos] = useState(initialTodos);
+
+  const toggleTodo = (selectedTodo: Todo) => {
+    const newTodos = todos.map((todo) => {
+      if (todo === selectedTodo) {
+        return {
+          ...todo,
+          complete: !todo.complete
+        }
+      }
+      return todo;
+    });
+
+    setTodos(newTodos);
+  }
+
+  const addTodo = (todoObj: AddTodoObj) => {
+    const newTodo = {
+      text: todoObj.todoText,
+      complete: false
+    };
+    setTodos([...todos, newTodo])
+  }
   return (
-      <ul>
-        <TodoListItem todo={todos[0]} />
-        <TodoListItem todo={todos[1]} />
-      </ul>
+    <>
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <AddTodoForm addTodo={addTodo} />
+    </>
   );
 }
 
