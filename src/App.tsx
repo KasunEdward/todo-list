@@ -1,25 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { TodoListItem } from './TodoListItem';
+
+const todos: Todo[] = [
+  {
+    text: "Get up",
+    complete: false
+  },
+  {
+    text: "Take breakfast",
+    complete: true
+  },
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Todo App
-        </a>
-      </header>
-    </div>
+      <ul>
+        <TodoListItem todo={todos[0]} />
+        <TodoListItem todo={todos[1]} />
+      </ul>
   );
 }
 
